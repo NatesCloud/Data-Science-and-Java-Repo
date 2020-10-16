@@ -1,0 +1,121 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+print("Hey!")
+```
+
+## Here is markdown 
+
+```{r}
+plot(cars)
+x <- sample(1:100, 1000, replace=TRUE)
+hist(x)
+
+x <- rnorm(100, mean=0, sd=1)
+y <- x + rnorm(100, mean=0, sd=1)
+plot(x,y)
+
+x.s <- sort(x)
+y.s <- sort(y)
+plot(x.s, y.s); lines(x.s, y.s); abline(a=0, b=1, col="red")
+
+#browseVignettes()
+install.packages("tidyverse")
+
+#library(ggplot2)
+#ggplot(data=diamonds) + geom_histogram(binwidth=500, aes(x=price)) + ggtitle("Diamond Price Distribution") + xlab("Diamond Price U$") + ylab("Frequency") + theme_minimal()
+#ggplot(diamonds, aes(x=carat,y=price)) + geom_point()
+#ggplot(diamonds, aes(x=carat,y=price, color=clarity)) + geom_point()
+
+#ggplot(diamonds, aes(x=carat,y=price, color=clarity, shape=cut)) + geom_point()
+
+#ggplot(diamonds, aes(x=carat,y=price, color=clarity, shape=cut)) + geom_point() + facet_wrap(~ cut)
+
+#ggplot(diamonds, aes(x=carat,y=price, color=clarity, shape=cut)) + geom_point() + facet_wrap(~ cut, nrow=5)
+
+#ggplot(diamonds, aes(x=carat,y=price, color=clarity, shape=cut)) + geom_point() + facet_wrap(~ cut, nrow=5)
+
+#ggplot(diamonds, aes(x=carat,y=price)) + geom_point() + geom_smooth()
+
+#ggplot(diamonds, aes(x=carat,y=price, color=clarity)) + geom_point() + geom_smooth()
+
+#ggplot(diamonds, aes(x=carat,y=price, color=clarity)) + geom_point() + geom_smooth()
+#ggplot(diamonds, aes(x=carat,y=price, color=clarity)) + geom_point() + geom_smooth(method="lm")
+
+#help(geom_smooth, ggplot2)
+
+### ######################################### Exercise 1
+
+### Importing Data
+library(readr)
+data <- read_csv("EconomistData.csv")
+data
+
+
+## Ploting basic scatter plot
+library(ggplot2)
+
+##Exercise 1
+
+# Q1
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point()
+
+# Q2
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point(size=2, color="blue")
+
+# Q3
+ggplot(data, aes(x=CPI, y=HDI, color=Region)) + geom_point()
+
+# Q4
+ggplot(data, aes(x=CPI, y=HDI, color=Region)) + geom_point(size=2)
+
+# Q5
+ggplot(data, aes(x=CPI, y=HDI, color=Region)) + geom_point(size=data$HDI.Rank/mean(data$HDI.Rank))
+
+
+##Exercise 2
+
+# Q1
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point()
+
+# Q2
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point() + geom_smooth()
+
+# Q3
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point() + geom_smooth(method="lm")
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point() + geom_smooth(method="loess")
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point() + geom_smooth(method="gam", formula = y ~s(x))
+
+# Q4
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point() + geom_line(color='steelblue', size=2)
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point() + geom_line(alpha=0.5)
+
+# Q5
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point() + geom_smooth(method="loess", span = 0.95)
+
+
+## Exercise 3
+# Q1
+ggplot(data, aes(x=CPI, y=HDI, color=Region)) + geom_point()
+
+# Q2
+ggplot(data, aes(x=CPI, y=HDI, color=Region)) + geom_point() + labs(x= "Corruption Perception Index", y= "Human Development Index")
+
+# Q2
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point() + labs(x= "Corruption Perception Index", y= "Human Development Index") + scale_colour_manual(values = c("blue", "green", "yellow", "magenta", "red", "black"))
+
+# Q3
+ggplot(data, aes(x=CPI, y=HDI)) + geom_point(aes(colour = Region)) + scale_colour_manual(values = c("blue", "green", "yellow", "orange", "red", "black"))
+
+list.files(readr_example(""))
+
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file). 
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+
